@@ -1,19 +1,27 @@
+inventory:
+  rabbitmq:
+    queue-name: ${RABBIT_Q:"order-q"}
+    exchange-name: ${RABBIT_EXCHANGE:"ordering"}
+    routing-key: ${RABBIT_ROUTE_KEY:"order-routing"}
+    host: ${RABBIT_HOST:localhost}
+    port: ${RABBIT_PORT:5672}
+    username: ${RABBIT_USER:guest}
+    password: ${RABBIT_PASS:guest}
 spring:
   application:
     name: inventory
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
   sql:
     init:
       mode: always
   datasource:
-    url: jdbc:postgresql://localhost:5432/inventorydb
-    username: postgres
-    password: pass123
+    url: jdbc:postgresql://${PG_HOST:localhost}:${PG_PORT:5432}/${PG_DB:inventorydb}
+    username: ${PG_USER:postgres}
+    password: ${PG_PASS:pg@1234}
     driver-class-name: org.postgresql.Driver
     jpa:
       hibernate:
@@ -23,3 +31,5 @@ spring:
         hibernate:
           format_sql: true
       defer-datasource-initilization: true
+server:
+  port: 8083
