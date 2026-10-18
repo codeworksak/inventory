@@ -11,7 +11,7 @@
     <groupId>com.codeworks</groupId>
     <artifactId>inventory</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>inventory</name>
     <description>inventory</description>
     <url/>
@@ -68,6 +68,7 @@
     </dependencies>
 
     <build>
+        <finalName>inventory</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

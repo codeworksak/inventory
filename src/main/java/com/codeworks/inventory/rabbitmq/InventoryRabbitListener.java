@@ -14,13 +14,18 @@ import java.util.UUID;
 public class InventoryRabbitListener {
     @Autowired
     private InventoryService inventoryService;
-    @RabbitListener(queues = "order-q")
+    @RabbitListener(queues = "${inventory.rabbitmq.queue-name}")
     @Transactional
     public void  decuctStock(List<CartItem> cartItems)
     {
         for(CartItem ci: cartItems)
         {
-            inventoryService.deductStock(UUID.fromString( ci.getProductId()),ci.getQuantity());
+            try {
+                inventoryService.deductStock(UUID.fromString(ci.getProductId()), ci.getQuantity());
+            }catch (Exception e){
+//                e.printStackTrace();
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
